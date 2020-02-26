@@ -137,8 +137,8 @@ export class MouseEventListener {
     element.addEventListener('mousemove', this.onMouseMove.bind(this));
     element.addEventListener('mousedown', this.onMouseDown.bind(this));
     element.addEventListener('mouseup', this.onMouseUp.bind(this));
-    element.addEventListener('keydown', this.onKeydown.bind(this));
-    element.addEventListener('keyup', this.onKeyup.bind(this));
+    document.addEventListener('keydown', this.onKeydown.bind(this));
+    document.addEventListener('keyup', this.onKeyup.bind(this));
     element.addEventListener('mousewheel', this.onMouseWheel.bind(this));
   }
 

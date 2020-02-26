@@ -14,13 +14,17 @@
     data() {
       return {
         imgWidget: new ImageWidget(),
+        imgLoaded: false, // 图片加载完成
       }
     },
     mounted() {
       this.imgWidget = new ImageWidget();
       this.imgWidget
         .loadImg(require('../../assets/bug.jpg'))
-        .then(imgWidget => imgWidget.render(this.ctx));
+        .then(imgWidget => {
+          imgWidget.render(this.ctx);
+          this.imgLoaded = true;
+        });
     },
     computed: {
       imageLayer() {
@@ -32,24 +36,26 @@
     },
     methods: {
       onMouseWheel({scale}) {
-        this.imgWidget
+        this.imgLoaded && this.imgWidget
           .clear(this.ctx)
           .setScale(scale)
           .render(this.ctx);
       },
-      onMouseMove({cdx, cdy}) {
-        this.imgWidget
-          .clear(this.ctx)
-          .move({offsetX: cdx, offsetY: cdy})
-          .render(this.ctx)
+      onMouseMove({cdx, cdy, spacepress, mousedown}) {
+        if (this.imgLoaded &&  spacepress && mousedown) {
+          this.imgWidget
+            .clear(this.ctx)
+            .move({offsetX: cdx, offsetY: cdy})
+            .render(this.ctx);
+        }
+      },
+      onMouseDown() {
+        this.imgWidget.updateLocation();
       },
       bindMouseEvent() {
         this.mouseEvent.addEventListener('mousewheel', this.onMouseWheel.bind(this));
         this.mouseEvent.addEventListener('mousemove', this.onMouseMove.bind(this));
-        this.mouseEvent.addEventListener('mousedown', this.onMouseMove.bind(this));
-        this.mouseEvent.addEventListener('mouseup', this.onMouseMove.bind(this));
-        this.mouseEvent.addEventListener('keydown', this.onMouseMove.bind(this));
-        this.mouseEvent.addEventListener('keyup', this.onMouseMove.bind(this));
+        this.mouseEvent.addEventListener('mousedown', this.onMouseDown.bind(this));
       }
     },
     watch: {
