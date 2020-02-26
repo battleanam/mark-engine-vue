@@ -19,12 +19,30 @@
     },
     mounted() {
       this.mouseEventListener = new MouseEventListener(this.markEngine);
+      this.bindMouseEvent();
     },
     computed: {
       markEngine() {
         return this.$refs['markEngine'];
       },
     },
+    methods: {
+      handleCursor({spacepress, mousedown}) {
+         if(spacepress && mousedown) {
+          this.markEngine.style.cursor = 'grabbing';
+        }else if(spacepress) {
+          this.markEngine.style.cursor = 'grab';
+        }else {
+          this.markEngine.style.cursor = 'default';
+        }
+      },
+      bindMouseEvent() {
+        this.mouseEventListener.addEventListener('keydown', this.handleCursor.bind(this));
+        this.mouseEventListener.addEventListener('keyup', this.handleCursor.bind(this));
+        this.mouseEventListener.addEventListener('mousedown', this.handleCursor.bind(this));
+        this.mouseEventListener.addEventListener('mouseup', this.handleCursor.bind(this));
+      }
+    }
   }
 </script>
 
@@ -33,5 +51,6 @@
     height: 400px;
     width: 600px;
     border: 2px solid black;
+    position: relative;
   }
 </style>

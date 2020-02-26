@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="marksLayer"></canvas>
+  <canvas ref="marksLayer" width="600" height="400"></canvas>
 </template>
 
 <script>
@@ -14,5 +14,11 @@
 </script>
 
 <style scoped>
-
+  canvas {
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+  }
 </style>

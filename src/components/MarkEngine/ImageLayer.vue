@@ -69,5 +69,11 @@
 </script>
 
 <style scoped>
-
+  canvas {
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+  }
 </style>

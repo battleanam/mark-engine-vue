@@ -17,13 +17,24 @@ export class ImageWidget extends RectWidget {
     const promise = new Promise(resolve => {
       img.onload = () => {
         this.img = img;
-        this.w = img.width;
-        this.h = img.height;
+        this.resetLocation();
         resolve(this);
       };
     });
     img.src = src;
     return promise;
+  }
+
+  /**
+   * 重置位置
+   */
+  resetLocation() {
+    const {img: {width, height}} = this;
+    const clientWidth = 600;
+    const clientHeight = 400;
+    this.w = clientWidth;
+    this.h = clientWidth * height / width;
+    this.y = (clientHeight - this.h) / 2;
   }
 
   render(ctx) {

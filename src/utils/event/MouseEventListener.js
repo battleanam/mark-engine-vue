@@ -7,7 +7,7 @@ export class MouseEventListener {
    * 构造函数
    * @param element 监听鼠标事件的 target
    */
-  constructor(element) {
+   constructor(element) {
     // 当前鼠标位置
     this.x = 0;
     this.y = 0;
