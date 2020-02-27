@@ -7,7 +7,7 @@ export class MouseEventListener {
    * 构造函数
    * @param element 监听鼠标事件的 target
    */
-   constructor(element) {
+  constructor(element) {
     // 当前鼠标位置
     this.x = 0;
     this.y = 0;
@@ -52,14 +52,15 @@ export class MouseEventListener {
     this.mousedown = false;
     this.dx = offsetX - this.sx;
     this.dy = offsetY - this.sy;
+    this.eventBus['mouseup'].forEach(fn => fn(this));
     this.sx = 0;
     this.sy = 0;
-    this.eventBus['mouseup'].forEach(fn => fn(this));
   }
 
   onKeydown(e) {
     if (e.key === " ") {
       e.preventDefault();
+      if(!this.spacepress) console.log(this);
       this.spacepress = true;
       this.eventBus['keydown'].forEach(fn => fn(this));
     }

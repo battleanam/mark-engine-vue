@@ -42,10 +42,9 @@ export class RectWidget {
     const {offsetX, offsetY} = this;
     this.x += offsetX;
     this.y += offsetY;
+    this.offsetX = 0;
+    this.offsetY = 0;
     return this;
   }
 
-  moveWithScale(scale) {
-
-  }
 }
