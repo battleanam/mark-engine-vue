@@ -36,10 +36,14 @@
             .render(this.ctx);
         });
       },
-      onMouseMove({cdx, cdy}) {
+      onMouseMove({cdx, cdy, x, y}) {
           this.mark.w = cdx;
           this.mark.h = cdy;
           this.updateMark(this.mark).clear().render();
+          this.marks.forEach(mark => {
+            const point = {offsetX: x, offsetY: y};
+            mark.hasPoint(point) && mark.render(this.ctx, {offsetX: x, offsetY: y});
+          });
       },
       onMouseDown({x, y, scale}) {
         this.mark = new MarkWidget({x, y, scale});
@@ -87,6 +91,5 @@
     z-index: 2;
     left: 0;
     top: 0;
-    border: 1px solid;
   }
 </style>

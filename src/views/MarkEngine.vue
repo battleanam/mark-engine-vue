@@ -24,7 +24,7 @@
       this.mouseEventListener = new MouseEventListener(this.markEngine);
       this.bindCursorEvent();
       this.imageLayer.setImage(
-        require('../assets/bug.jpg'),
+        require('../assets/GetBigPic.jpg'),
         ({x, y, w, h}) => {
           this.canvas = new CanvasWidget({
             x, y, w, h
@@ -116,6 +116,7 @@
     width: 600px;
     border: 2px solid black;
     position: relative;
+    margin: auto;
     overflow: hidden;
   }
 </style>

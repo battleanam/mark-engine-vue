@@ -41,14 +41,22 @@ export class MouseEventListener {
     this.eventBus['mousemove'].forEach(fn => fn(this));
   }
 
-  onMouseDown({offsetX, offsetY}) {
+  onMouseDown(e) {
+    const {offsetX, offsetY, button} = e;
+    if (button === 2) {
+      this.onKeydown(e);
+    }
     this.mousedown = true;
     this.sx = offsetX;
     this.sy = offsetY;
     this.eventBus['mousedown'].forEach(fn => fn(this));
   }
 
-  onMouseUp({offsetX, offsetY}) {
+  onMouseUp(e) {
+    const {offsetX, offsetY, button} = e;
+    if (button === 2) {
+      this.onKeyup(e);
+    }
     this.mousedown = false;
     this.dx = offsetX - this.sx;
     this.dy = offsetY - this.sy;
@@ -58,17 +66,17 @@ export class MouseEventListener {
   }
 
   onKeydown(e) {
-    if (e.key === " ") {
+    if (e.key === " " || e.button === 2) {
       e.preventDefault();
-      if(!this.spacepress) console.log(this);
+      if (!this.spacepress) console.log(this);
       this.spacepress = true;
       this.eventBus['keydown'].forEach(fn => fn(this));
     }
   }
 
   onKeyup(e) {
-    if (e.key === " ") {
-      e.preventDefault();
+    if (e.key === " " || e.button === 2) {
+      e.button !== 2 && e.preventDefault();
       this.spacepress = false;
       this.eventBus['keydown'].forEach(fn => fn(this));
     }
@@ -135,6 +143,7 @@ export class MouseEventListener {
    */
   initEvent() {
     const {element} = this;
+    element.addEventListener('contextmenu', e => e.preventDefault());
     element.addEventListener('mousemove', this.onMouseMove.bind(this));
     element.addEventListener('mousedown', this.onMouseDown.bind(this));
     element.addEventListener('mouseup', this.onMouseUp.bind(this));

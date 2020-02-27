@@ -16,13 +16,17 @@ export class MarkWidget extends RectWidget {
     Object.assign(this, props);
   }
 
-  render(ctx) {
-    console.log(this);
-    const {color, width, x, y, w, h, scale} = this;
+  render(ctx, point) {
+    const {color, width, x, y, w, h, scale, hasPoint} = this;
     ctx.save();
-    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.strokeStyle = point && hasPoint(point) ? 'yellow' : color;
     ctx.lineWidth = width;
-    ctx.strokeRect(x * scale, y * scale, w * scale, h * scale);
+    const rx = Math.floor(x * scale) + 0.5;
+    const ry = Math.floor(y * scale) + 0.5;
+    ctx.moveTo(rx, ry);
+    ctx.rect(rx, ry, w * scale, h * scale);
+    ctx.stroke();
     ctx.restore();
   }
 }

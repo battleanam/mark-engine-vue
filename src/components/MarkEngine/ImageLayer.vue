@@ -30,10 +30,11 @@
       }
     },
     methods: {
-      onMouseWheel({scale}) {
+      onMouseWheel({scale, x, y}) {
         this.imgWidget
           .clear(this.ctx)
           .setScale(scale)
+          // .moveWithScale(x, y)
           .render(this.ctx);
       },
       onMouseMove({cdx, cdy, spacepress, mousedown}) {
@@ -62,16 +63,16 @@
           });
       }
     },
-    watch: {
-      mouseEvent: function (val) {
-        if (val) {
-          this.setImage(
-            require('../../assets/bug.jpg'),
-            () => this.bindMouseEvent()
-          );
-        }
-      }
-    }
+    // watch: {
+    //   mouseEvent: function (val) {
+    //     if (val) {
+    //       this.setImage(
+    //         require('../../assets/bug.jpg'),
+    //         () => this.bindMouseEvent()
+    //       );
+    //     }
+    //   }
+    // }
   }
 </script>
 

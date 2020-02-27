@@ -41,4 +41,5 @@ export class ImageWidget extends RectWidget {
     ctx.drawImage(img, x + offsetX, y + offsetY, w * scale, h * scale);
     ctx.restore();
   }
+
 }
