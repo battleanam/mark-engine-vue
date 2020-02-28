@@ -49,7 +49,7 @@
         this.imgWidget.updateLocation();
       },
       bindMouseEvent() {
-        this.mouseEvent.addEventListener('mousewheel', this.onMouseWheel.bind(this));
+        // this.mouseEvent.addEventListener('mousewheel', this.onMouseWheel.bind(this));
         this.mouseEvent.addEventListener('mousemove', this.onMouseMove.bind(this));
         this.mouseEvent.addEventListener('mouseup', this.onMouseDown.bind(this));
       },

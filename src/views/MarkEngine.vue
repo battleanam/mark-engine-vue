@@ -71,8 +71,12 @@
         this.mouseEventListener.addEventListener('mousedown', this.handleCursor.bind(this));
         this.mouseEventListener.addEventListener('mouseup', this.handleCursor.bind(this));
       },
-      onMouseWheel({scale}) {
+      onMouseWheel({scale, x, y}) {
+        this.imageLayer.onMouseWheel({scale, x, y});
+        const {imgWidget: {x: offsetX, y: offsetY}} = this.imageLayer;
+        const {x: sx, y: sy} = this.canvas;
         this.canvas
+          .move({offsetX: offsetX - sx, offsetY: offsetY - sy})
           .setScale(scale)
           .render(this.marksLayer.marksLayer);
         this.marksLayer.onMouseWheel({scale});
