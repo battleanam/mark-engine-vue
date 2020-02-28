@@ -33,8 +33,8 @@
       onMouseWheel({scale, x, y}) {
         this.imgWidget
           .clear(this.ctx)
-          .setScale(scale)
-          // .moveWithScale(x, y)
+          // .setScale(scale)
+          .moveWithScale(x, y, scale)
           .render(this.ctx);
       },
       onMouseMove({cdx, cdy, spacepress, mousedown}) {
@@ -51,7 +51,7 @@
       bindMouseEvent() {
         this.mouseEvent.addEventListener('mousewheel', this.onMouseWheel.bind(this));
         this.mouseEvent.addEventListener('mousemove', this.onMouseMove.bind(this));
-        this.mouseEvent.addEventListener('mousedown', this.onMouseDown.bind(this));
+        this.mouseEvent.addEventListener('mouseup', this.onMouseDown.bind(this));
       },
       setImage(src, callback) {
         this.imgWidget = new ImageWidget();

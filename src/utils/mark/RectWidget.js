@@ -35,11 +35,16 @@ export class RectWidget {
     return this;
   }
 
-  moveWithScale(offsetX, offsetY) {
+  moveWithScale(offsetX, offsetY, nextScale) {
     const {x, y, scale} = this;
-    const step = 0.1;
-    this.x = x - (offsetX - x) * (step - scale) / scale;
-    this.y = y - (offsetY - y) * (step - scale) / scale;
+    let step = 0.1;
+    if(scale < nextScale) {
+      step = - 0.1;
+    }
+    const s = step / scale;
+    this.x = x - x * s + offsetX * s;
+    this.y = y - y * s + offsetY * s;
+    this.setScale(nextScale);
     return this;
   }
 
